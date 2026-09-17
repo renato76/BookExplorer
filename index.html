@@ -17,16 +17,16 @@
 
 <body>
 
-    <header class="text-center py-5 px-3 bg-dark text-white">
-        <h1>Book Explorer</h1>
-        <p class="lead">
-            Search for books and discover your next read.
-        </p>
-    </header>
+    <main class="container py-5">
 
-    <main class="container pb-5">
+        <header class="text-center mb-5">
+            <h1>Book Explorer</h1>
+            <p class="lead">
+                Search for books and discover your next read.
+            </p>
+        </header>
 
-        <section aria-labelledby="search-heading" class="mt-5">
+        <section aria-labelledby="search-heading">
 
             <h2 id="search-heading" class="h3 mb-3">
                 Search for a book
@@ -70,12 +70,8 @@
 
         <section
             class="mt-5"
-            aria-labelledby="results-heading"
+            aria-label="Search results"
         >
-
-            <h2 id="results-heading" class="h3 mb-4">
-                Results
-            </h2>
 
             <div id="results" class="row g-4">
                 <!-- Books are added here with JavaScript -->
