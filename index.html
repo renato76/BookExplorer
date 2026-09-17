@@ -21,27 +21,27 @@
 
         <header class="text-center mb-5">
             <h1>Book Explorer</h1>
-            <p class="lead">
-                Search for books and discover your next read.
+            <p class="lead fst-italic">
+                Discover your next read.
             </p>
         </header>
 
-        <section aria-labelledby="search-heading">
+        <section aria-labelledby="search-heading" class="text-center google-search">
 
-            <h2 id="search-heading" class="h3 mb-3">
+            <h2 id="search-heading" class="h5 mb-4 fw-normal">
                 Search for a book
             </h2>
 
             <form id="search-form" class="search-form">
 
                 <div class="mb-3">
-                    <label for="search-input" class="form-label">
+                    <label for="search-input" class="form-label visually-hidden">
                         Enter a book title or subject
                     </label>
 
                     <input
                         type="text"
-                        class="form-control"
+                        class="form-control google-input"
                         id="search-input"
                         name="search"
                         placeholder="e.g. JavaScript"
@@ -54,11 +54,11 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-light border shadow-sm rounded-pill">
                     Search Books
                 </button>
 
-                <button type="button" id="reset-search" class="btn btn-outline-secondary">
+                <button type="button" id="reset-search" class="btn btn-light border shadow-sm rounded-pill">
                     Reset
                 </button>
 

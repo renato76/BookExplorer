@@ -5,10 +5,35 @@
     padding: 0.5rem;
 }
 
+.logo-banner {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 0.75rem;
+}
+
 @media (min-width: 768px) {
     .search-form {
         max-width: 320px;
     }
+}
+
+.google-search .search-form {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 560px;
+}
+
+.google-input {
+    border-radius: 24px;
+    padding: 0.65rem 1.25rem;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    border-color: transparent;
+}
+
+.google-input:focus {
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    border-color: #dfe1e5;
 }
 
 .book-thumbnail-placeholder {
@@ -42,3 +67,28 @@
     box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.18) !important;
 }
 
+.skeleton {
+    background: linear-gradient(90deg, #e9ecef 25%, #f4f5f6 37%, #e9ecef 63%);
+    background-size: 400% 100%;
+    animation: skeleton-shimmer 1.4s ease infinite;
+    border-radius: 0.25rem;
+}
+
+.skeleton-text {
+    height: 0.75rem;
+}
+
+.skeleton-btn {
+    height: 1.9rem;
+    width: 5rem;
+    border-radius: 0.25rem;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}

@@ -73,6 +73,7 @@ resetButton.addEventListener('click', () => {
 
 async function fetchBooks() {
     setStatus('Loading books…');
+    renderSkeletons();
 
     const url = new URL(API_BASE_URL);
     url.searchParams.set('page', currentPage);
@@ -101,6 +102,33 @@ function renderBooks(books) {
 
     for (const book of books) {
         resultsContainer.appendChild(createBookCard(book));
+    }
+}
+
+function renderSkeletons() {
+    resultsContainer.innerHTML = '';
+
+    for (let i = 0; i < RESULTS_PER_PAGE; i += 1) {
+        const col = document.createElement('div');
+        col.className = 'col-12 col-sm-6 col-lg-4 col-xl-3';
+        col.innerHTML = `
+            <div class="card h-100 shadow-sm" aria-hidden="true">
+                <div class="card-img-top book-thumbnail skeleton"></div>
+                <div class="card-body d-flex flex-column">
+                    <div class="skeleton skeleton-text w-75 mb-2"></div>
+                    <div class="skeleton skeleton-text w-50 mb-2"></div>
+                    <div class="flex-grow-1 mb-3">
+                        <div class="skeleton skeleton-text w-100 mb-1"></div>
+                        <div class="skeleton skeleton-text w-100 mb-1"></div>
+                        <div class="skeleton skeleton-text w-75"></div>
+                    </div>
+                    <div class="skeleton skeleton-text w-50 mb-1"></div>
+                    <div class="skeleton skeleton-text w-50 mb-3"></div>
+                    <div class="skeleton skeleton-btn mt-auto"></div>
+                </div>
+            </div>
+        `;
+        resultsContainer.appendChild(col);
     }
 }
 
