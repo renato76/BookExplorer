@@ -4,6 +4,7 @@ const RESULTS_PER_PAGE = 12;
 const searchForm = document.getElementById('search-form');
 const searchInput = document.getElementById('search-input');
 const resetButton = document.getElementById('reset-search');
+const searchStatus = document.getElementById('search-status');
 const resultsContainer = document.getElementById('results');
 const firstPageBtn = document.getElementById('first-page');
 const prevPageBtn = document.getElementById('prev-page');
@@ -17,9 +18,23 @@ let totalPages = 1;
 
 searchForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    currentQuery = searchInput.value.trim();
+
+    const trimmedValue = searchInput.value.trim();
+
+    // reject whitespace-only input, which HTML's "required" attribute alone won't catch
+    if (!trimmedValue) {
+        searchInput.classList.add('is-invalid');
+        return;
+    }
+
+    searchInput.classList.remove('is-invalid');
+    currentQuery = trimmedValue;
     currentPage = 1;
     fetchBooks();
+});
+
+searchInput.addEventListener('input', () => {
+    searchInput.classList.remove('is-invalid');
 });
 
 prevPageBtn.addEventListener('click', () => {
@@ -50,12 +65,15 @@ lastPageBtn.addEventListener('click', () => {
 
 resetButton.addEventListener('click', () => {
     searchInput.value = '';
+    searchInput.classList.remove('is-invalid');
     currentQuery = '';
     currentPage = 1;
     fetchBooks();
 });
 
 async function fetchBooks() {
+    setStatus('Loading books…');
+
     const url = new URL(API_BASE_URL);
     url.searchParams.set('page', currentPage);
     url.searchParams.set('limit', RESULTS_PER_PAGE);
@@ -63,12 +81,19 @@ async function fetchBooks() {
         url.searchParams.set('query', currentQuery);
     }
 
-    const response = await fetch(url);
-    const payload = await response.json();
-    const books = payload?.data?.data ?? [];
+    try {
+        const response = await fetch(url);
+        const payload = await response.json();
+        const books = payload?.data?.data ?? [];
 
-    renderBooks(books);
-    updatePagination(payload?.data);
+        renderBooks(books);
+        updatePagination(payload?.data);
+
+        setStatus(books.length === 0 ? 'No books found. Try a different search.' : '');
+    } catch (error) {
+        console.error('Failed to fetch books:', error);
+        setStatus('Something went wrong while fetching books. Please try again.');
+    }
 }
 
 function renderBooks(books) {
@@ -117,6 +142,10 @@ function updatePagination(data) {
     prevPageBtn.disabled = !data.previousPage;
     nextPageBtn.disabled = !data.nextPage;
     lastPageBtn.disabled = !data.nextPage;
+}
+
+function setStatus(message) {
+    searchStatus.textContent = message;
 }
 
 fetchBooks();
