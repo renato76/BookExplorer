@@ -5,6 +5,12 @@
     padding: 0.5rem;
 }
 
+@media (min-width: 768px) {
+    .search-form {
+        max-width: 320px;
+    }
+}
+
 .book-thumbnail-placeholder {
     display: flex;
     align-items: center;
