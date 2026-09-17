@@ -3,6 +3,7 @@ const RESULTS_PER_PAGE = 12;
 
 const searchForm = document.getElementById('search-form');
 const searchInput = document.getElementById('search-input');
+const resetButton = document.getElementById('reset-search');
 const resultsContainer = document.getElementById('results');
 const firstPageBtn = document.getElementById('first-page');
 const prevPageBtn = document.getElementById('prev-page');
@@ -45,6 +46,13 @@ lastPageBtn.addEventListener('click', () => {
         currentPage = totalPages;
         fetchBooks();
     }
+});
+
+resetButton.addEventListener('click', () => {
+    searchInput.value = '';
+    currentQuery = '';
+    currentPage = 1;
+    fetchBooks();
 });
 
 async function fetchBooks() {
