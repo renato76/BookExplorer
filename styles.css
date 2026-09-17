@@ -1,1 +1,38 @@
+.book-thumbnail {
+    height: 220px;
+    object-fit: contain;
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+}
+
+.book-thumbnail-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #adb5bd;
+    font-size: 0.9rem;
+}
+
+/* keeps the pagination bar from jumping when a page has fewer cards than a full row set */
+#results {
+    min-height: 60vh;
+    align-content: start;
+}
+
+@media (max-width: 575.98px) {
+    .pagination-bar .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+}
+
+.card-clickable {
+    cursor: pointer;
+    transition: box-shadow 0.15s ease;
+}
+
+.card-clickable:hover,
+.card-clickable:focus-visible {
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.18) !important;
+}
 

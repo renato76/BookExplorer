@@ -108,20 +108,54 @@ function createBookCard(book) {
     const info = book.volumeInfo ?? {};
     const title = info.title ?? 'Untitled';
     const authors = info.authors?.join(', ') ?? 'Unknown author';
+    const description = info.description ?? 'No description available.';
     const thumbnail = info.imageLinks?.thumbnail ?? info.imageLinks?.smallThumbnail;
+    const publishedDate = info.publishedDate ?? 'Unknown';
+    const rating = info.averageRating;
+    const previewLink = info.previewLink;
 
     const col = document.createElement('div');
     col.className = 'col-12 col-sm-6 col-lg-4 col-xl-3';
 
     col.innerHTML = `
-        <div class="card h-100">
-            ${thumbnail ? `<img src="${thumbnail}" class="card-img-top" alt="Cover of ${title}">` : ''}
-            <div class="card-body">
-                <h3 class="h6 card-title">${title}</h3>
-                <p class="card-subtitle text-muted small">${authors}</p>
+        <div class="card h-100 shadow-sm${previewLink ? ' card-clickable' : ''}"${previewLink ? ' role="link" tabindex="0"' : ''}>
+            ${thumbnail
+                ? `<img src="${thumbnail}" class="card-img-top book-thumbnail" alt="Cover of ${escapeHtml(title)}">`
+                : `<div class="card-img-top book-thumbnail book-thumbnail-placeholder">No Cover</div>`
+            }
+            <div class="card-body d-flex flex-column">
+                <h3 class="h6 card-title">${escapeHtml(title)}</h3>
+                <p class="card-subtitle text-muted small mb-2">${escapeHtml(authors)}</p>
+                <p class="card-text small flex-grow-1">${escapeHtml(truncate(description, 150))}</p>
+                <ul class="list-unstyled small text-muted mb-3">
+                    <li>Published: ${escapeHtml(publishedDate)}</li>
+                    ${rating ? `<li>Rating: ${rating} / 5</li>` : ''}
+                </ul>
+                ${previewLink
+                    ? `<a href="${previewLink}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary mt-auto">Preview</a>`
+                    : ''
+                }
             </div>
         </div>
     `;
+
+    if (previewLink) {
+        const card = col.querySelector('.card');
+
+        card.addEventListener('click', (event) => {
+            // the Preview link already navigates itself; avoid opening a second tab
+            if (!event.target.closest('a')) {
+                window.open(previewLink, '_blank', 'noopener,noreferrer');
+            }
+        });
+
+        card.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                window.open(previewLink, '_blank', 'noopener,noreferrer');
+            }
+        });
+    }
 
     return col;
 }
@@ -146,6 +180,17 @@ function updatePagination(data) {
 
 function setStatus(message) {
     searchStatus.textContent = message;
+}
+
+function truncate(text, maxLength) {
+    return text.length > maxLength ? `${text.slice(0, maxLength).trimEnd()}…` : text;
+}
+
+function escapeHtml(value) {
+    // leverage the DOM to HTML-encode text, preventing XSS from API data injected via innerHTML
+    const div = document.createElement('div');
+    div.textContent = value;
+    return div.innerHTML;
 }
 
 fetchBooks();
