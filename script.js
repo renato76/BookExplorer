@@ -48,18 +48,21 @@ resetButton.addEventListener('click', () => {
 prevPageBtn.addEventListener('click', () => {
     if (currentPage > 1) {
         currentPage -= 1;
+        snapToTop();
         fetchBooks();
     }
 });
 
 nextPageBtn.addEventListener('click', () => {
     currentPage += 1;
+    snapToTop();
     fetchBooks();
 });
 
 firstPageBtn.addEventListener('click', () => {
     if (currentPage !== 1) {
         currentPage = 1;
+        snapToTop();
         fetchBooks();
     }
 });
@@ -67,6 +70,7 @@ firstPageBtn.addEventListener('click', () => {
 lastPageBtn.addEventListener('click', () => {
     if (currentPage !== totalPages) {
         currentPage = totalPages;
+        snapToTop();
         fetchBooks();
     }
 });
@@ -205,6 +209,13 @@ function updatePagination(data) {
 
 function setStatus(message) {
     searchStatus.textContent = message;
+}
+
+function snapToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'auto'
+    });
 }
 
 function truncate(text, maxLength) {
