@@ -85,6 +85,10 @@
     align-content: start;
 }
 
+.site-footer {
+    padding: 3rem 1rem 3rem;
+}
+
 @media (max-width: 575.98px) {
     main.container {
         padding-top: 1.5rem !important;
@@ -94,6 +98,7 @@
         padding: 0.25rem 0.5rem;
         font-size: 0.875rem;
     }
+
 }
 
 .card-clickable {
