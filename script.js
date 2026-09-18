@@ -48,34 +48,30 @@ resetButton.addEventListener('click', () => {
 prevPageBtn.addEventListener('click', () => {
     if (currentPage > 1) {
         currentPage -= 1;
-        snapToTop();
-        fetchBooks();
+        fetchBooks(true);
     }
 });
 
 nextPageBtn.addEventListener('click', () => {
     currentPage += 1;
-    snapToTop();
-    fetchBooks();
+    fetchBooks(true);
 });
 
 firstPageBtn.addEventListener('click', () => {
     if (currentPage !== 1) {
         currentPage = 1;
-        snapToTop();
-        fetchBooks();
+        fetchBooks(true);
     }
 });
 
 lastPageBtn.addEventListener('click', () => {
     if (currentPage !== totalPages) {
         currentPage = totalPages;
-        snapToTop();
-        fetchBooks();
+        fetchBooks(true);
     }
 });
 
-async function fetchBooks() {
+async function fetchBooks(shouldScrollToTop = false) {
     setStatus('Loading books…');
     renderSkeletons();
 
@@ -93,6 +89,10 @@ async function fetchBooks() {
 
         renderBooks(books);
         updatePagination(payload?.data);
+
+        if (shouldScrollToTop) {
+            snapToTop();
+        }
 
         setStatus(books.length === 0 ? 'No books found. Try a different search.' : '');
     } catch (error) {
@@ -212,10 +212,9 @@ function setStatus(message) {
 }
 
 function snapToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'auto'
-    });
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
 }
 
 function truncate(text, maxLength) {
