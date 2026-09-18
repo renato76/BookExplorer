@@ -19,18 +19,14 @@
 
     <main class="container py-5">
 
-        <header class="text-center mb-5">
+        <header class="text-center mb-3">
             <h1>Book Explorer</h1>
             <p class="lead fst-italic">
                 Discover your next read.
             </p>
         </header>
 
-        <section aria-labelledby="search-heading" class="text-center google-search">
-
-            <h2 id="search-heading" class="h5 mb-4 fw-normal">
-                Search for a book
-            </h2>
+        <section aria-label="Book search" class="text-center google-search">
 
             <form id="search-form" class="search-form">
 
@@ -44,7 +40,7 @@
                         class="form-control google-input"
                         id="search-input"
                         name="search"
-                        placeholder="e.g. JavaScript"
+                        placeholder="Search books, e.g JavaScript"
                         maxlength="50"
                         required
                     >
@@ -54,7 +50,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-light border shadow-sm rounded-pill">
+                <button type="submit" class="btn btn-primary shadow-sm rounded-pill">
                     Search Books
                 </button>
 

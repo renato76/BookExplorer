@@ -37,6 +37,14 @@ searchInput.addEventListener('input', () => {
     searchInput.classList.remove('is-invalid');
 });
 
+resetButton.addEventListener('click', () => {
+    searchInput.value = '';
+    searchInput.classList.remove('is-invalid');
+    currentQuery = '';
+    currentPage = 1;
+    fetchBooks();
+});
+
 prevPageBtn.addEventListener('click', () => {
     if (currentPage > 1) {
         currentPage -= 1;
@@ -61,14 +69,6 @@ lastPageBtn.addEventListener('click', () => {
         currentPage = totalPages;
         fetchBooks();
     }
-});
-
-resetButton.addEventListener('click', () => {
-    searchInput.value = '';
-    searchInput.classList.remove('is-invalid');
-    currentQuery = '';
-    currentPage = 1;
-    fetchBooks();
 });
 
 async function fetchBooks() {
