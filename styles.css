@@ -1,8 +1,9 @@
 .book-thumbnail {
     height: 220px;
     object-fit: contain;
-    background-color: #f8f9fa;
-    padding: 0.5rem;
+    background-color: #f1f3f5;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
 }
 
 .logo-banner {
@@ -42,6 +43,40 @@
     justify-content: center;
     color: #adb5bd;
     font-size: 0.9rem;
+}
+
+.card {
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+    border-radius: 0.75rem;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card-title {
+    min-height: 2.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
+}
+
+.card-subtitle {
+    min-height: 1.25rem;
+}
+
+.card-text {
+    color: #495057;
+    line-height: 1.5;
+}
+
+.card .list-unstyled {
+    border-top: 1px solid #e9ecef;
+    padding-top: 0.75rem;
+}
+
+.card .btn {
+    border-radius: 999px;
 }
 
 /* keeps the pagination bar from jumping when a page has fewer cards than a full row set */

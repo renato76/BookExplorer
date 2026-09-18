@@ -122,7 +122,6 @@ function renderSkeletons() {
                         <div class="skeleton skeleton-text w-100 mb-1"></div>
                         <div class="skeleton skeleton-text w-75"></div>
                     </div>
-                    <div class="skeleton skeleton-text w-50 mb-1"></div>
                     <div class="skeleton skeleton-text w-50 mb-3"></div>
                     <div class="skeleton skeleton-btn mt-auto"></div>
                 </div>
@@ -138,8 +137,7 @@ function createBookCard(book) {
     const authors = info.authors?.join(', ') ?? 'Unknown author';
     const description = info.description ?? 'No description available.';
     const thumbnail = info.imageLinks?.thumbnail ?? info.imageLinks?.smallThumbnail;
-    const publishedDate = info.publishedDate ?? 'Unknown';
-    const rating = info.averageRating;
+    const publishedDate = formatPublishedDate(info.publishedDate);
     const previewLink = info.previewLink;
 
     const col = document.createElement('div');
@@ -157,7 +155,6 @@ function createBookCard(book) {
                 <p class="card-text small flex-grow-1">${escapeHtml(truncate(description, 150))}</p>
                 <ul class="list-unstyled small text-muted mb-3">
                     <li>Published: ${escapeHtml(publishedDate)}</li>
-                    ${rating ? `<li>Rating: ${rating} / 5</li>` : ''}
                 </ul>
                 ${previewLink
                     ? `<a href="${previewLink}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary mt-auto">Preview</a>`
@@ -212,6 +209,28 @@ function setStatus(message) {
 
 function truncate(text, maxLength) {
     return text.length > maxLength ? `${text.slice(0, maxLength).trimEnd()}…` : text;
+}
+
+function formatPublishedDate(value) {
+    if (!value) {
+        return 'Unknown';
+    }
+
+    const match = /^\d{4}-(\d{2})-\d{2}$/.exec(value);
+
+    if (!match) {
+        return value;
+    }
+
+    const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    const month = Number(match[1]);
+
+    return month >= 1 && month <= 12
+        ? `${monthNames[month - 1]} ${value.slice(0, 4)}`
+        : value;
 }
 
 function escapeHtml(value) {
