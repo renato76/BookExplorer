@@ -156,8 +156,8 @@ function createBookCard(book) {
             <div class="card-body d-flex flex-column">
                 <h3 class="h6 card-title">${escapeHtml(title)}</h3>
                 <p class="card-subtitle text-muted small mb-2">${escapeHtml(authors)}</p>
-                <p class="card-text small flex-grow-1">${escapeHtml(truncate(description, 150))}</p>
-                <ul class="list-unstyled small text-muted mb-3">
+                <p class="card-text small flex-grow-1">${escapeHtml(truncate(description, 160))}</p>
+                <ul class="list-unstyled small text-muted mb-2">
                     <li>Published: ${escapeHtml(publishedDate)}</li>
                 </ul>
                 ${previewLink

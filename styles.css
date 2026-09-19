@@ -1,8 +1,8 @@
 .book-thumbnail {
-    height: 220px;
+    height: 190px;
     object-fit: contain;
-    background-color: #f1f3f5;
-    padding: 1rem;
+    background-color: #f3f3f3;
+    padding: 0.6rem;
     border-bottom: 1px solid #e9ecef;
 }
 
@@ -63,16 +63,26 @@
 
 .card-subtitle {
     min-height: 1.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .card-text {
     color: #495057;
     line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .card .list-unstyled {
     border-top: 1px solid #e9ecef;
-    padding-top: 0.75rem;
+    padding-top: 0.65rem;
+    font-weight: 600;
+    font-size: 0.725rem;
 }
 
 .card .btn {
