@@ -119,14 +119,19 @@ function renderSkeletons() {
             <div class="card h-100 shadow-sm" aria-hidden="true">
                 <div class="card-img-top book-thumbnail skeleton"></div>
                 <div class="card-body d-flex flex-column">
-                    <div class="skeleton skeleton-text w-75 mb-2"></div>
-                    <div class="skeleton skeleton-text w-50 mb-2"></div>
-                    <div class="flex-grow-1 mb-3">
+                    <div class="card-title d-flex flex-column justify-content-center">
+                        <div class="skeleton skeleton-text w-75"></div>
+                    </div>
+                    <div class="card-subtitle mb-2 d-flex flex-column justify-content-center">
+                        <div class="skeleton skeleton-text w-50 mb-1"></div>
+                        <div class="skeleton skeleton-text w-40"></div>
+                    </div>
+                    <div class="flex-grow-1 mb-2">
                         <div class="skeleton skeleton-text w-100 mb-1"></div>
                         <div class="skeleton skeleton-text w-100 mb-1"></div>
                         <div class="skeleton skeleton-text w-75"></div>
                     </div>
-                    <div class="skeleton skeleton-text w-50 mb-3"></div>
+                    <div class="skeleton skeleton-text w-50 mb-2"></div>
                     <div class="skeleton skeleton-btn mt-auto"></div>
                 </div>
             </div>
